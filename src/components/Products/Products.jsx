@@ -1,31 +1,33 @@
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Products.css';
 import fetchProducts from '../../api/fetchProducts';
 import ProductCard from '../ProductCard/ProductCard';
 import Loading from '../Loading/Loading';
 
-function Products () {
-
+function Products() {
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-
     fetchProducts('iphone').then((response) => {
       setProducts(response);
+      setLoading(false); // Fixed the incorrect value here
     });
-
   }, []);
 
-
   return (
-    <section className="products container">
-      <Loading />
-      {
-        products.map((product) => <ProductCard key={product.id} data={product}/>)
-      }
-
-    </section>
+    <>
+      {loading ? (
+        <Loading />
+      ) : (
+        <section className="products container">
+          {products.map((product) => (
+            <ProductCard key={product.id} data={product} />
+          ))}
+        </section>
+      )}
+    </>
   );
-}  
+}
 
 export default Products;

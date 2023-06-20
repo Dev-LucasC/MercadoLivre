@@ -4,7 +4,7 @@ import './Loading.css';
 
 
 function Loading() {
-  return <BiLoaderAlt  className='loading'/>;
+  return <BiLoaderAlt  className="loading"/>;
 }
 
 export default Loading; 
